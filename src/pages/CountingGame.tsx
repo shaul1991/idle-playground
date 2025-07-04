@@ -245,14 +245,11 @@ const CountingGame: React.FC = () => {
           <div className="current-info">
             <div className="game-status">
               {!gameStarted ? (
-                <p>1번 타일을 클릭해서 게임을 시작하세요!</p>
+                <p><span className="current-number">1</span>번 타일을 클릭해서 게임을 시작하세요!</p>
               ) : gameCompleted ? (
                 <p className="completed">🎉 축하합니다! {maxNumber}까지 모두 찾았어요!</p>
               ) : (
-                <>
-                  <p>찾는 숫자: <span className="current-number">{currentNumber}</span></p>
-                  <p>마지막 클릭: <span className="last-number">{lastClickedNumber}</span></p>
-                </>
+                <p>찾는 숫자: <span className="current-number">{currentNumber}</span></p>
               )}
             </div>
             <div className="timer-section">

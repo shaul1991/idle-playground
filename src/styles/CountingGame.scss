@@ -296,6 +296,7 @@ $font-mono: 'Courier New', monospace;
 }
 
 .game-status {
+  min-height: 0.5rem;
   flex: 2;
   display: flex;
   flex-direction: column;
@@ -344,18 +345,14 @@ $font-mono: 'Courier New', monospace;
 }
 
 .current-number {
-  @include gradient-text($modal-gradient);
+  @include gradient-text($accent-gradient);
   padding: 0.5rem 1rem;
   font-size: 1.5rem;
   margin: 0 0.5rem;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 8px 16px rgba(240, 147, 251, 0.4);
 }
 
-.last-number {
-  @include gradient-text($accent-gradient);
-  padding: 0.3rem 0.8rem;
-  margin: 0 0.5rem;
-}
+
 
 .completed {
   font-size: 1.5rem !important;
