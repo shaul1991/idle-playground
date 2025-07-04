@@ -139,6 +139,93 @@ $font-mono: 'Courier New', monospace;
   }
 }
 
+// 완료 모달 스타일
+.completion-modal {
+  text-align: center;
+  
+  h2 {
+    color: #27ae60;
+    font-size: 2.2rem;
+    margin: 0 0 1.5rem 0;
+    animation: bounce 0.6s ease infinite alternate;
+  }
+}
+
+.completion-stats {
+  margin: 1.5rem 0;
+  
+  .difficulty-completed {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #667eea;
+    margin: 0 0 0.5rem 0;
+  }
+  
+  .range-completed {
+    font-size: 1.1rem;
+    color: #666;
+    margin: 0 0 1.5rem 0;
+  }
+}
+
+.final-time-display {
+  background: $success-gradient;
+  border-radius: $border-radius-lg;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  
+  .time-label {
+    font-size: 1rem;
+    color: white;
+    font-weight: 500;
+    opacity: 0.9;
+  }
+  
+  .time-value-large {
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    font-family: $font-mono;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.completion-buttons {
+  display: flex;
+  gap: 1rem;
+  margin: 1.5rem 0 0 0;
+}
+
+.play-again-button,
+.other-games-button {
+  @include button-base;
+  @include hover-lift;
+  flex: 1;
+  padding: 1rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.play-again-button {
+  background: $modal-gradient;
+  color: white;
+  box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+}
+
+.other-games-button {
+  background: $accent-gradient;
+  color: white;
+  box-shadow: 0 8px 16px rgba(240, 147, 251, 0.3);
+}
+
 .difficulty-buttons {
   display: flex;
   flex-direction: column;
@@ -567,6 +654,41 @@ $font-mono: 'Courier New', monospace;
     font-size: 1.1rem;
   }
 
+  .completion-modal {
+    h2 {
+      font-size: 1.8rem;
+    }
+  }
+
+  .completion-stats {
+    .difficulty-completed {
+      font-size: 1.1rem;
+    }
+
+    .range-completed {
+      font-size: 1rem;
+    }
+  }
+
+  .final-time-display {
+    padding: 1.2rem;
+
+    .time-value-large {
+      font-size: 1.6rem;
+    }
+  }
+
+  .completion-buttons {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .play-again-button,
+  .other-games-button {
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+  }
+
   .game-header h1 {
     font-size: 2rem;
   }
@@ -650,6 +772,40 @@ $font-mono: 'Courier New', monospace;
   .start-button {
     padding: 0.7rem 1.2rem;
     font-size: 1rem;
+  }
+
+  .completion-modal {
+    h2 {
+      font-size: 1.6rem;
+    }
+  }
+
+  .completion-stats {
+    .difficulty-completed {
+      font-size: 1rem;
+    }
+
+    .range-completed {
+      font-size: 0.9rem;
+    }
+  }
+
+  .final-time-display {
+    padding: 1rem;
+
+    .time-label {
+      font-size: 0.9rem;
+    }
+
+    .time-value-large {
+      font-size: 1.4rem;
+    }
+  }
+
+  .play-again-button,
+  .other-games-button {
+    padding: 0.7rem 0.8rem;
+    font-size: 0.9rem;
   }
 
   .game-header {
@@ -778,6 +934,53 @@ $font-mono: 'Courier New', monospace;
   .start-button {
     padding: 0.6rem 1rem;
     font-size: 1rem;
+  }
+
+  .completion-modal {
+    max-height: 85vh;
+    overflow-y: auto;
+
+    h2 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  .completion-stats {
+    margin: 1rem 0;
+
+    .difficulty-completed {
+      font-size: 1rem;
+    }
+
+    .range-completed {
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  .final-time-display {
+    padding: 0.8rem;
+    margin: 0.8rem 0;
+
+    .time-label {
+      font-size: 0.9rem;
+    }
+
+    .time-value-large {
+      font-size: 1.3rem;
+    }
+  }
+
+  .completion-buttons {
+    margin: 1rem 0 0 0;
+    gap: 0.8rem;
+  }
+
+  .play-again-button,
+  .other-games-button {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
   }
 
   .modal-info p {

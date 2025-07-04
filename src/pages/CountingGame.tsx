@@ -17,6 +17,7 @@ const CountingGame: React.FC = () => {
   const [gameCompleted, setGameCompleted] = useState<boolean>(false);
   const [lastClickedNumber, setLastClickedNumber] = useState<number>(0);
   const [showModal, setShowModal] = useState<boolean>(true);
+  const [showCompletionModal, setShowCompletionModal] = useState<boolean>(false);
   const [selectedDifficulty, setSelectedDifficulty] = useState<Difficulty | null>(null);
   const [startTime, setStartTime] = useState<number | null>(null);
   const [elapsedTime, setElapsedTime] = useState<number>(0);
@@ -95,6 +96,7 @@ const CountingGame: React.FC = () => {
       if (tile.value === maxNumber) {
         setGameCompleted(true);
         setGameTime(elapsedTime);
+        setShowCompletionModal(true);
         return;
       }
 
@@ -156,6 +158,22 @@ const CountingGame: React.FC = () => {
     }
   }, [initializeBoard, showModal]);
 
+  // 모달이 열려있을 때 body 스크롤 방지
+  useEffect(() => {
+    const isAnyModalOpen = showModal || showCompletionModal;
+    
+    if (isAnyModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    // 컴포넌트 언마운트 시 정리
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [showModal, showCompletionModal]);
+
   // 타이머 useEffect
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -189,10 +207,25 @@ const CountingGame: React.FC = () => {
 
   const resetGame = () => {
     setShowModal(true);
+    setShowCompletionModal(false);
     setSelectedDifficulty(null);
     setStartTime(null);
     setElapsedTime(0);
     setGameTime(0);
+  };
+
+  const playAgain = () => {
+    setShowCompletionModal(false);
+    setShowModal(true);
+    setSelectedDifficulty(null);
+    setGameCompleted(false);
+    setStartTime(null);
+    setElapsedTime(0);
+    setGameTime(0);
+  };
+
+  const goToMainPage = () => {
+    window.history.back();
   };
 
   return (
@@ -238,6 +271,32 @@ const CountingGame: React.FC = () => {
               <p>💡 추천: 처음이라면 '보통' 난이도부터 시작해보세요!</p>
               <p>🎯 항상 최대 10개 타일이 보드에 유지되어 게임이 더 재미있어요!</p>
               <p>🌟 게임 후반부에는 남은 숫자만큼 타일이 줄어들어 난이도가 조절됩니다!</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showCompletionModal && (
+        <div className="modal-overlay">
+          <div className="modal-content completion-modal">
+            <h2>🎉 축하합니다!</h2>
+            <div className="completion-stats">
+              <p className="difficulty-completed">
+                {selectedDifficulty && getDifficultySettings(selectedDifficulty).label} 난이도 완주!
+              </p>
+              <p className="range-completed">1부터 {maxNumber}까지 모두 찾았어요!</p>
+              <div className="final-time-display">
+                <span className="time-label">완주 시간</span>
+                <span className="time-value-large">{formatTime(gameTime)}</span>
+              </div>
+            </div>
+            <div className="completion-buttons">
+              <button className="play-again-button" onClick={playAgain}>
+                🔄 다시하기
+              </button>
+              <button className="other-games-button" onClick={goToMainPage}>
+                🎮 다른 놀이보기
+              </button>
             </div>
           </div>
         </div>
