@@ -119,10 +119,18 @@
 }
 
 .modal-info p {
-  margin: 0;
+  margin: 0.5rem 0;
   color: #333;
   font-size: 0.9rem;
   font-weight: 500;
+}
+
+.modal-info p:first-child {
+  margin-top: 0;
+}
+
+.modal-info p:last-child {
+  margin-bottom: 0;
 }
 
 .game-header {

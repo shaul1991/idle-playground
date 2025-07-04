@@ -15,24 +15,23 @@ const CountingGame: React.FC = () => {
   const [gameCompleted, setGameCompleted] = useState<boolean>(false);
   const [lastClickedNumber, setLastClickedNumber] = useState<number>(0);
   const [showModal, setShowModal] = useState<boolean>(true);
-  const [inputMaxNumber, setInputMaxNumber] = useState<string>('10');
+  const [inputMaxNumber, setInputMaxNumber] = useState<string>('20');
 
   // 게임 시작 함수
   const startGame = () => {
     const num = parseInt(inputMaxNumber);
-    if (num < 3 || num > 16) {
-      alert('3부터 16까지의 숫자를 입력해주세요!');
+    if (num < 10 || num > 50) {
+      alert('10부터 50까지의 숫자를 입력해주세요!');
       return;
     }
     
     setMaxNumber(num);
     setShowModal(false);
-    initializeBoard(num);
+    initializeBoard();
   };
 
   // 게임 보드 초기화
-  const initializeBoard = useCallback((targetMaxNumber?: number) => {
-    const currentMaxNumber = targetMaxNumber || maxNumber;
+  const initializeBoard = useCallback(() => {
     const newBoard: TileData[] = [];
     
     // 16개 위치 생성
@@ -44,13 +43,12 @@ const CountingGame: React.FC = () => {
       });
     }
 
-    // 1부터 maxNumber까지 숫자를 랜덤하게 배치
-    const displayCount = Math.min(currentMaxNumber, 10); // 최대 10개까지만 표시
-    const numbers = Array.from({ length: displayCount }, (_, i) => i + 1);
+    // 항상 1부터 10까지 숫자를 랜덤하게 배치
+    const numbers = Array.from({ length: 10 }, (_, i) => i + 1);
     const availablePositions = Array.from({ length: 16 }, (_, i) => i);
     
-    // 랜덤하게 선택된 위치에 숫자 배치
-    for (let i = 0; i < displayCount; i++) {
+    // 랜덤하게 선택된 위치에 1-10 숫자 배치
+    for (let i = 0; i < 10; i++) {
       const randomIndex = Math.floor(Math.random() * availablePositions.length);
       const position = availablePositions[randomIndex];
       availablePositions.splice(randomIndex, 1);
@@ -67,7 +65,7 @@ const CountingGame: React.FC = () => {
     setGameStarted(false);
     setGameCompleted(false);
     setLastClickedNumber(0);
-  }, [maxNumber]);
+  }, []);
 
   // 타일 클릭 핸들러
   const handleTileClick = (tile: TileData) => {
@@ -98,18 +96,39 @@ const CountingGame: React.FC = () => {
         value: null
       };
 
-      // 다음 숫자가 maxNumber 이하이면 빈 타일에 배치
-      if (nextNumber <= maxNumber) {
-        const emptyTiles = newBoard.filter(t => !t.isVisible);
-        if (emptyTiles.length > 0) {
-          const randomEmptyTile = emptyTiles[Math.floor(Math.random() * emptyTiles.length)];
-          const emptyTileIndex = newBoard.findIndex(t => t.position === randomEmptyTile.position);
-          newBoard[emptyTileIndex] = {
-            ...newBoard[emptyTileIndex],
-            value: nextNumber,
-            isVisible: true
-          };
+      // 현재 보드에서 보이는 숫자들 확인
+      const visibleNumbers = newBoard
+        .filter(t => t.isVisible && t.value !== null)
+        .map(t => t.value as number);
+
+      // 남은 숫자들 (아직 게임에서 나오지 않은 숫자들)
+      const remainingNumbers = [];
+      for (let i = nextNumber; i <= maxNumber; i++) {
+        if (!visibleNumbers.includes(i)) {
+          remainingNumbers.push(i);
         }
+      }
+
+      // 노출되어야 할 타일 개수 계산 (최대 10개, 남은 숫자가 적으면 그만큼)
+      const currentVisibleCount = visibleNumbers.length;
+      const targetVisibleCount = Math.min(10, currentVisibleCount + remainingNumbers.length);
+      const tilesToAdd = targetVisibleCount - currentVisibleCount;
+
+      // 필요한 만큼 새로운 숫자 타일 추가
+      const emptyTiles = newBoard.filter(t => !t.isVisible);
+      for (let i = 0; i < Math.min(tilesToAdd, remainingNumbers.length, emptyTiles.length); i++) {
+        const randomEmptyIndex = Math.floor(Math.random() * emptyTiles.length);
+        const randomEmptyTile = emptyTiles[randomEmptyIndex];
+        const emptyTileIndex = newBoard.findIndex(t => t.position === randomEmptyTile.position);
+        
+        newBoard[emptyTileIndex] = {
+          ...newBoard[emptyTileIndex],
+          value: remainingNumbers[i],
+          isVisible: true
+        };
+        
+        // 사용된 빈 타일을 배열에서 제거
+        emptyTiles.splice(randomEmptyIndex, 1);
       }
 
       setBoard(newBoard);
@@ -135,12 +154,12 @@ const CountingGame: React.FC = () => {
             <h2>🔢 숫자 놀이 설정</h2>
             <p>몇까지 숫자를 찾고 싶나요?</p>
             <div className="input-group">
-              <label htmlFor="maxNumber">최대 숫자 (3-16):</label>
+              <label htmlFor="maxNumber">최대 숫자 (10-50):</label>
               <input
                 id="maxNumber"
                 type="number"
-                min="3"
-                max="16"
+                min="10"
+                max="50"
                 value={inputMaxNumber}
                 onChange={(e) => setInputMaxNumber(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && startGame()}
@@ -152,7 +171,9 @@ const CountingGame: React.FC = () => {
               </button>
             </div>
             <div className="modal-info">
-              <p>💡 추천: 처음이라면 10부터 시작해보세요!</p>
+              <p>💡 추천: 처음이라면 20부터 시작해보세요!</p>
+              <p>🎯 항상 최대 10개 타일이 보드에 유지되어 게임이 더 재미있어요!</p>
+              <p>🌟 게임 후반부에는 남은 숫자만큼 타일이 줄어들어 난이도가 조절됩니다!</p>
             </div>
           </div>
         </div>
@@ -214,7 +235,6 @@ const CountingGame: React.FC = () => {
             <h3>게임 방법</h3>
             <ul>
               <li>1부터 순서대로 숫자를 클릭하세요</li>
-              <li>올바른 숫자를 클릭하면 다음 숫자가 나타납니다</li>
               <li>{maxNumber}까지 모든 숫자를 찾으면 게임 완료!</li>
             </ul>
           </div>
