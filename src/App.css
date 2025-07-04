@@ -101,70 +101,114 @@
 
 /* Horizontal mobile screens (568px - 896px) */
 @media screen and (min-width: 568px) and (max-width: 896px) and (orientation: landscape) {
-  .main-container {
-    padding: 15px;
+  .app-header {
+    padding: 1rem 1rem 0.5rem 1rem;
   }
 
   .title {
-    font-size: 2.5rem;
-    margin-bottom: 0.8rem;
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
   }
 
   .subtitle {
-    font-size: 1.3rem;
-    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
   }
 
-  .status-message {
-    padding: 1.2rem;
+  .main-content {
+    padding: 1rem;
   }
 
-  .status-message p {
+  .games-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+
+  .game-tile {
+    width: 150px;
+    height: 150px;
+  }
+
+  .game-emoji {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .game-title {
     font-size: 1rem;
+  }
+
+  .coming-soon-label {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
   }
 }
 
 /* iPad and larger tablets (768px+) */
 @media screen and (min-width: 768px) and (max-width: 1024px) {
-  .content-wrapper {
-    max-width: 700px;
+  .app-header {
+    padding: 2.5rem 1rem 1.5rem 1rem;
   }
 
   .title {
     font-size: 3.5rem;
-    margin-bottom: 1.2rem;
+    margin-bottom: 1rem;
   }
 
   .subtitle {
-    font-size: 1.8rem;
-    margin-bottom: 2.5rem;
+    font-size: 1.6rem;
   }
 
-  .status-message {
-    padding: 2rem;
+  .games-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
   }
 
-  .status-message p {
-    font-size: 1.2rem;
+  .game-tile {
+    width: 220px;
+    height: 220px;
+  }
+
+  .game-emoji {
+    font-size: 3.5rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .game-title {
+    font-size: 1.3rem;
   }
 }
 
 /* Large iPad Pro and desktop tablets */
 @media screen and (min-width: 1024px) {
-  .content-wrapper {
-    max-width: 900px;
+  .app-header {
+    padding: 3rem 1rem 2rem 1rem;
   }
 
   .title {
     font-size: 4rem;
+    margin-bottom: 1.2rem;
   }
 
   .subtitle {
     font-size: 2rem;
-    margin-bottom: 3rem;
   }
 
-  .status-message {
-    padding: 2.5rem;
+  .games-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2.5rem;
+  }
+
+  .game-tile {
+    width: 240px;
+    height: 240px;
+  }
+
+  .game-emoji {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .game-title {
+    font-size: 1.4rem;
   }
 }
