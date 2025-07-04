@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import '../styles/CountingGame.css';
+import '../styles/CountingGame.scss';
 
 interface TileData {
   value: number | null;

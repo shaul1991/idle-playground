@@ -1,4 +1,4 @@
-import './App.css';
+import './styles/App.scss';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import CountingGame from './pages/CountingGame';
 import HomePage from './pages/HomePage';

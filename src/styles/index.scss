@@ -1,0 +1,190 @@
+// 변수 정의
+$font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+$background-light: #f7f9fc;
+$background-dark: #1a1a1a;
+$background-white: #ffffff;
+$text-white: #ffffff;
+$text-black: #000000;
+
+$font-size-base: 16px;
+$font-size-mobile: 14px;
+$font-size-desktop: 18px;
+
+$touch-size-base: 44px;
+$touch-size-mobile: 48px;
+$touch-size-tablet: 56px;
+$touch-size-desktop: 60px;
+
+$font-size-large: 1.5rem;
+$font-size-medium: 1.125rem;
+$font-size-small: 1rem;
+
+$line-height-large: 1.4;
+$line-height-medium: 1.5;
+$line-height-small: 1.6;
+
+// 믹스인 정의
+@mixin touch-friendly($min-height: $touch-size-base, $min-width: $touch-size-base) {
+  min-height: $min-height;
+  min-width: $min-width;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@mixin touch-interaction {
+  &:hover,
+  &:focus {
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+@mixin font-smoothing {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin no-select {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+// 기본 리셋 및 전역 스타일
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: $font-size-base;
+  // 터치 디바이스에서 더블 탭 줌 방지
+  touch-action: manipulation;
+}
+
+body {
+  font-family: $font-family;
+  @include font-smoothing;
+  @include no-select;
+
+  // 모바일 최적화
+  overflow-x: hidden;
+
+  // 메인 앱 배경 그라데이션 (전체 스크롤 영역 덮음)
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-attachment: fixed; // 배경 고정으로 스크롤과 관계없이 전체 덮음
+  min-height: 100vh;
+  min-height: 100dvh; // 동적 뷰포트 높이
+}
+
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+// 터치 친화적인 기본 스타일
+button,
+[role='button'] {
+  @include touch-friendly;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+// 터치 가능한 요소들의 기본 스타일
+.touchable {
+  @include touch-friendly($touch-size-desktop, $touch-size-desktop);
+  @include touch-interaction;
+}
+
+// 반응형 텍스트 크기
+.text-large {
+  font-size: $font-size-large;
+  line-height: $line-height-large;
+}
+
+.text-medium {
+  font-size: $font-size-medium;
+  line-height: $line-height-medium;
+}
+
+.text-small {
+  font-size: $font-size-small;
+  line-height: $line-height-small;
+}
+
+// 모바일 우선 반응형 디자인
+@media (max-width: 768px) {
+  html {
+    font-size: $font-size-mobile;
+  }
+
+  .text-large {
+    font-size: 1.25rem;
+  }
+
+  .touchable {
+    @include touch-friendly($touch-size-mobile, $touch-size-mobile);
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  // 태블릿 스타일
+  html {
+    font-size: $font-size-base;
+  }
+
+  .touchable {
+    @include touch-friendly($touch-size-tablet, $touch-size-tablet);
+  }
+}
+
+@media (min-width: 1025px) {
+  // 데스크톱 스타일
+  html {
+    font-size: $font-size-desktop;
+  }
+
+  .touchable {
+    @include touch-friendly($touch-size-desktop, $touch-size-desktop);
+  }
+}
+
+// 접근성 개선
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+// 고대비 모드 지원
+@media (prefers-contrast: high) {
+  body {
+    background-color: $background-white;
+    color: $text-black;
+  }
+}
+
+// 다크 모드 지원 준비  
+@media (prefers-color-scheme: dark) {
+  body {
+    // 다크 모드에서도 동일한 그라데이션 배경 유지
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-attachment: fixed;
+    color: $text-white;
+  }
+} 

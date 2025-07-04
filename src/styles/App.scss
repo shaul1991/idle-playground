@@ -1,0 +1,300 @@
+// 변수 정의
+$primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+$white-transparent: rgba(255, 255, 255, 0.1);
+$white-transparent-light: rgba(255, 255, 255, 0.15);
+$white-transparent-medium: rgba(255, 255, 255, 0.2);
+$shadow-light: rgba(0, 0, 0, 0.2);
+$shadow-dark: rgba(0, 0, 0, 0.3);
+
+$border-radius-sm: 12px;
+$border-radius-md: 24px;
+
+$font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+
+// 믹스인 정의
+@mixin glass-effect {
+  backdrop-filter: blur(10px);
+  border: 1px solid $white-transparent-medium;
+}
+
+@mixin hover-lift {
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px $shadow-light;
+  }
+}
+
+@mixin text-shadow {
+  text-shadow: 2px 2px 4px $shadow-dark;
+}
+
+// 기본 스타일
+.app {
+  min-height: 100vh;
+  background: transparent; // body에서 배경을 처리하므로 투명으로 설정
+  font-family: $font-family;
+  color: white;
+}
+
+.app-header {
+  text-align: center;
+  padding: 2rem 1rem 1rem 1rem;
+
+  .title {
+    font-size: 3rem;
+    margin: 0 0 1rem 0;
+    font-weight: 700;
+    @include text-shadow;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+    margin: 0;
+    font-weight: 300;
+    opacity: 0.9;
+  }
+}
+
+.main-content {
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); // 2컬럼 고정
+  gap: 1.5rem;
+  justify-items: center;
+  max-width: 500px; // 최대 너비 제한
+  margin: 0 auto; // 중앙 정렬
+}
+
+.game-tile {
+  position: relative;
+  width: 160px; // 모바일에 맞게 축소
+  height: 160px; // 모바일에 맞게 축소
+  background: $white-transparent;
+  @include glass-effect;
+  border-radius: $border-radius-md;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between; // 공간 균등 분배
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  padding: 1rem 0.5rem; // 내부 패딩 추가
+  @include hover-lift;
+
+  &.coming-soon {
+    opacity: 0.6;
+    cursor: not-allowed;
+
+    &:hover {
+      transform: none;
+      box-shadow: none;
+    }
+  }
+
+  &.ready {
+    background: $white-transparent-light;
+  }
+
+  .game-emoji {
+    font-size: 2.2rem; // 라벨 공간 확보를 위해 약간 축소
+    margin: 0; // 자동 마진 제거
+    flex-shrink: 0; // 축소 방지
+  }
+
+  .game-title {
+    font-size: 1rem; // 라벨 공간 확보를 위해 약간 축소
+    font-weight: 600;
+    margin: 0.5rem 0; // 상하 마진만 유지
+    flex-grow: 1; // 가용 공간 활용
+    display: flex;
+    align-items: center;
+  }
+
+  .coming-soon-label {
+    background: $white-transparent-medium;
+    padding: 0.2rem 0.6rem;
+    border-radius: $border-radius-sm;
+    font-size: 0.7rem;
+    font-weight: 500;
+    flex-shrink: 0; // 축소 방지
+    margin-top: auto; // 하단으로 밀어내기
+  }
+
+  // ready 상태인 타일에서는 coming-soon-label이 없으므로 공간 조정
+  &.ready {
+    justify-content: center; // ready 상태에서는 중앙 정렬로 복원
+    
+    .game-emoji {
+      margin-bottom: 0.8rem; // ready 상태에서는 마진 복원
+    }
+  }
+}
+
+// 반응형 디자인
+// 매우 작은 화면 (320px 이하)
+@media screen and (max-width: 320px) {
+  .games-grid {
+    gap: 1rem; // 간격 축소
+    max-width: 320px;
+  }
+
+  .game-tile {
+    width: 130px; // 더 작은 타일
+    height: 130px;
+    padding: 0.7rem 0.4rem; // 작은 화면용 패딩
+
+    .game-emoji {
+      font-size: 1.8rem; // 더 작게 조정
+      margin: 0;
+    }
+
+    .game-title {
+      font-size: 0.85rem; // 더 작게 조정
+      margin: 0.3rem 0;
+    }
+
+    .coming-soon-label {
+      font-size: 0.6rem;
+      padding: 0.15rem 0.4rem;
+    }
+  }
+}
+
+// 가로 모드 모바일 (568px - 896px)
+@media screen and (min-width: 568px) and (max-width: 896px) and (orientation: landscape) {
+  .app-header {
+    padding: 1rem 1rem 0.5rem 1rem;
+
+    .title {
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+    }
+  }
+
+  .main-content {
+    padding: 1rem;
+  }
+
+  .games-grid {
+    grid-template-columns: repeat(3, 1fr); // 가로 모드에서는 3컬럼
+    gap: 1rem;
+    max-width: 600px; // 가로 모드 최대 너비
+  }
+
+  .game-tile {
+    width: 150px;
+    height: 150px;
+    padding: 0.8rem 0.5rem; // 가로 모드용 패딩
+
+    .game-emoji {
+      font-size: 2.2rem; // 조정
+      margin: 0;
+    }
+
+    .game-title {
+      font-size: 0.95rem; // 조정
+      margin: 0.4rem 0;
+    }
+
+    .coming-soon-label {
+      font-size: 0.65rem; // 조정
+      padding: 0.18rem 0.5rem;
+    }
+  }
+}
+
+// iPad 및 대형 태블릿 (768px+)
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .app-header {
+    padding: 2.5rem 1rem 1.5rem 1rem;
+
+    .title {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .subtitle {
+      font-size: 1.6rem;
+    }
+  }
+
+  .games-grid {
+    grid-template-columns: repeat(3, 1fr); // iPad에서는 3컬럼
+    gap: 2rem;
+    max-width: 800px; // iPad 최대 너비
+  }
+
+  .game-tile {
+    width: 200px; // 3컬럼에 맞게 조정
+    height: 200px; // 3컬럼에 맞게 조정
+    padding: 1.2rem 0.8rem; // iPad용 패딩
+
+    .game-emoji {
+      font-size: 2.8rem; // 크기 조정
+      margin: 0;
+    }
+
+    .game-title {
+      font-size: 1.1rem; // 크기 조정
+      margin: 0.6rem 0;
+    }
+
+    .coming-soon-label {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.6rem;
+    }
+  }
+}
+
+// 대형 iPad Pro 및 데스크톱 태블릿
+@media screen and (min-width: 1024px) {
+  .app-header {
+    padding: 3rem 1rem 2rem 1rem;
+
+    .title {
+      font-size: 4rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .subtitle {
+      font-size: 2rem;
+    }
+  }
+
+  .games-grid {
+    grid-template-columns: repeat(4, 1fr); // 데스크톱에서는 4컬럼
+    gap: 2.5rem;
+    max-width: 1000px; // 데스크톱 최대 너비
+  }
+
+  .game-tile {
+    width: 200px; // 4컬럼에 맞게 조정
+    height: 200px; // 4컬럼에 맞게 조정
+    padding: 1.2rem 0.8rem; // 데스크톱용 패딩
+
+    .game-emoji {
+      font-size: 2.8rem; // 크기 조정
+      margin: 0;
+    }
+
+    .game-title {
+      font-size: 1.1rem; // 크기 조정
+      margin: 0.6rem 0;
+    }
+
+    .coming-soon-label {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.6rem;
+    }
+  }
+} 
