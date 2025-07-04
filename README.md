@@ -1,46 +1,114 @@
-# Getting Started with Create React App
+# 🎨 idle-playground
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+아이들을 위한 인터랙티브 놀이터입니다. 다양한 교육용 게임을 통해 재미있게 학습할 수 있습니다.
 
-## Available Scripts
+## 🎮 구현된 게임
 
-In the project directory, you can run:
+### 🔢 숫자 놀이
+4x4 타일 보드에서 1부터 10까지 순서대로 숫자를 찾는 게임입니다.
+
+**게임 규칙:**
+- 4x4 보드에 1-10 숫자가 랜덤하게 배치됩니다 (10개 타일에만 숫자 표시, 6개는 비어있음)
+- 1번 타일을 클릭하여 게임을 시작합니다
+- 순서대로 숫자를 클릭하면 다음 숫자가 빈 타일에 나타납니다
+- 10까지 모든 숫자를 찾으면 게임 완료!
+
+**교육 효과:**
+- 숫자 인식 능력 향상
+- 순서 개념 학습
+- 집중력과 기억력 발달
+
+## 🚀 시작하기
+
+### 필요 조건
+- Node.js (v16 이상)
+- npm 또는 yarn
+
+### 설치 및 실행
+
+1. 저장소 클론
+```bash
+git clone [repository-url]
+cd idle-playground
+```
+
+2. 의존성 설치
+```bash
+npm install
+```
+
+3. 개발 서버 실행
+```bash
+npm start
+```
+
+브라우저에서 [http://localhost:3000](http://localhost:3000)을 열어 애플리케이션을 확인할 수 있습니다.
+
+## 🛠️ 사용 가능한 스크립트
 
 ### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+개발 모드로 앱을 실행합니다. 파일을 수정하면 자동으로 새로고침됩니다.
 
 ### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+테스트 러너를 대화형 감시 모드로 실행합니다.
 
 ### `npm run build`
+프로덕션용으로 앱을 빌드하여 `build` 폴더에 저장합니다.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### `npm run lint`
+코드 스타일 검사를 실행합니다.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### `npm run format`
+코드 포맷팅을 자동으로 적용합니다.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🎯 향후 계획
 
-### `npm run eject`
+다음 게임들이 개발 예정입니다:
+- 🎨 그림 그리기
+- 🧩 퍼즐 맞추기  
+- 🧠 기억력 게임
+- 🎵 음악 놀이
+- 🌈 색깔 놀이
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 🏗️ 프로젝트 구조
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+src/
+├── components/     # 재사용 가능한 컴포넌트
+├── pages/         # 페이지 컴포넌트
+│   ├── HomePage.tsx
+│   └── CountingGame.tsx
+├── styles/        # CSS 스타일 파일
+├── assets/        # 이미지, 아이콘, 사운드 파일
+├── hooks/         # 커스텀 React 훅
+├── services/      # API 및 외부 서비스
+├── store/         # 상태 관리
+├── types/         # TypeScript 타입 정의
+└── utils/         # 유틸리티 함수
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## 🔧 기술 스택
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- **Frontend**: React 19, TypeScript
+- **Routing**: React Router DOM
+- **Styling**: CSS3 (그라데이션, 애니메이션)
+- **Build Tool**: Create React App
+- **Code Quality**: ESLint, Prettier
 
-## Learn More
+## 📱 모바일 지원
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+모든 게임은 모바일 디바이스에 최적화되어 있습니다:
+- 터치 친화적인 인터페이스
+- 반응형 디자인
+- 가로/세로 모드 지원
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🎨 디자인 철학
+
+- **아이 친화적**: 밝고 재미있는 색상 사용
+- **직관적**: 간단하고 명확한 UI/UX
+- **접근성**: 큰 터치 타겟과 명확한 시각적 피드백
+- **안전**: 아이들에게 안전한 콘텐츠만 제공
+
+## 📄 라이선스
+
+이 프로젝트는 교육 목적으로 제작되었습니다.
