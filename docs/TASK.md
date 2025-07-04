@@ -4,16 +4,16 @@
 
 ## 1️⃣ 프로젝트 초기 설정 및 환경 구성
 
-- [ ] React + TypeScript 프로젝트 생성 (Create React App 또는 Vite 사용)
-- [ ] 프로젝트 폴더 구조 설계 및 정리
-  - [ ] 컴포넌트, 페이지, 훅, 유틸리티 폴더 구조 설계
-  - [ ] 에셋 폴더 구조 (이미지, 사운드, 아이콘)
-- [ ] TypeScript 설정 (tsconfig.json 구성)
-- [ ] ESLint, Prettier 설정
-- [ ] Git 저장소 초기화 및 .gitignore 설정
-- [ ] 개발 환경과 배포 환경 분리 설정
-- [ ] 반응형 디자인을 위한 기본 CSS 설정 (모바일/태블릿 최적화)
-- [ ] 환경 변수 설정 (.env 파일)
+- [x] React + TypeScript 프로젝트 생성 (Create React App)
+- [x] 프로젝트 폴더 구조 설계 및 정리
+  - [x] 컴포넌트, 페이지, 훅, 유틸리티 폴더 구조 설계
+  - [x] 에셋 폴더 구조 (이미지, 사운드, 아이콘)
+- [x] TypeScript 설정 (tsconfig.json 구성)
+- [x] ESLint, Prettier 설정
+- [x] Git 저장소 초기화 및 .gitignore 설정
+- [x] 개발 환경과 배포 환경 분리 설정
+- [x] 반응형 디자인을 위한 기본 CSS 설정 (모바일/태블릿 최적화)
+- [x] 환경 변수 설정 (.env 파일)
 
 ## 2️⃣ 핵심 기술 스택 설치 및 구성
 
