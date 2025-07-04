@@ -139,6 +139,58 @@ $font-mono: 'Courier New', monospace;
   }
 }
 
+.difficulty-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.difficulty-button {
+  @include button-base;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #e1e5e9;
+  padding: 1rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px $shadow-medium;
+    border-color: #667eea;
+  }
+  
+  &.selected {
+    background: $modal-gradient;
+    border-color: #667eea;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+  }
+  
+  .difficulty-label {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.2;
+  }
+  
+  .difficulty-range {
+    font-size: 1rem;
+    opacity: 0.8;
+    margin: 0.25rem 0 0 0;
+    line-height: 1.2;
+  }
+  
+  &.selected .difficulty-range {
+    opacity: 1;
+  }
+}
+
 .modal-buttons {
   margin: 1.5rem 0;
 }
@@ -155,6 +207,19 @@ $font-mono: 'Courier New', monospace;
 
   &:active {
     transform: translateY(0);
+  }
+
+  &:disabled {
+    background: rgba(0, 0, 0, 0.2);
+    color: rgba(255, 255, 255, 0.5);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+
+    &:hover {
+      transform: none;
+      box-shadow: none;
+    }
   }
 }
 
@@ -477,6 +542,26 @@ $font-mono: 'Courier New', monospace;
     font-size: 1.1rem;
   }
 
+  .difficulty-buttons {
+    gap: 0.6rem;
+  }
+
+  .difficulty-button {
+    padding: 0.8rem;
+
+    .difficulty-label {
+      font-size: 1.1rem;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .difficulty-range {
+      font-size: 0.9rem;
+      margin: 0.2rem 0 0 0;
+      line-height: 1.2;
+    }
+  }
+
   .start-button {
     padding: 0.8rem 1.5rem;
     font-size: 1.1rem;
@@ -546,9 +631,20 @@ $font-mono: 'Courier New', monospace;
     }
   }
 
-  .input-group input {
+  .difficulty-button {
     padding: 0.7rem;
-    font-size: 1rem;
+
+    .difficulty-label {
+      font-size: 1rem;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .difficulty-range {
+      font-size: 0.85rem;
+      margin: 0.2rem 0 0 0;
+      line-height: 1.2;
+    }
   }
 
   .start-button {
@@ -658,12 +754,24 @@ $font-mono: 'Courier New', monospace;
     }
   }
 
-  .input-group {
+  .difficulty-buttons {
+    gap: 0.6rem;
     margin: 1rem 0;
+  }
 
-    input {
-      padding: 0.6rem;
+  .difficulty-button {
+    padding: 0.6rem;
+
+    .difficulty-label {
       font-size: 1rem;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .difficulty-range {
+      font-size: 0.85rem;
+      margin: 0.15rem 0 0 0;
+      line-height: 1.2;
     }
   }
 

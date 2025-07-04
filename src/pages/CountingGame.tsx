@@ -7,6 +7,8 @@ interface TileData {
   position: number;
 }
 
+type Difficulty = 'easy' | 'normal' | 'hard';
+
 const CountingGame: React.FC = () => {
   const [board, setBoard] = useState<TileData[]>([]);
   const [currentNumber, setCurrentNumber] = useState<number>(1);
@@ -15,20 +17,25 @@ const CountingGame: React.FC = () => {
   const [gameCompleted, setGameCompleted] = useState<boolean>(false);
   const [lastClickedNumber, setLastClickedNumber] = useState<number>(0);
   const [showModal, setShowModal] = useState<boolean>(true);
-  const [inputMaxNumber, setInputMaxNumber] = useState<string>('20');
+  const [selectedDifficulty, setSelectedDifficulty] = useState<Difficulty | null>(null);
   const [startTime, setStartTime] = useState<number | null>(null);
   const [elapsedTime, setElapsedTime] = useState<number>(0);
   const [gameTime, setGameTime] = useState<number>(0);
 
-  // 게임 시작 함수
-  const startGame = () => {
-    const num = parseInt(inputMaxNumber);
-    if (num < 10 || num > 50) {
-      alert('10부터 50까지의 숫자를 입력해주세요!');
-      return;
+  // 난이도별 설정 함수
+  const getDifficultySettings = (difficulty: Difficulty) => {
+    switch (difficulty) {
+      case 'easy': return { maxNumber: 10, label: '쉬움', description: '1부터 10까지' };
+      case 'normal': return { maxNumber: 20, label: '보통', description: '1부터 20까지' };
+      case 'hard': return { maxNumber: 30, label: '어려움', description: '1부터 30까지' };
     }
-    
-    setMaxNumber(num);
+  };
+
+  // 게임 시작 함수
+  const startGame = (difficulty: Difficulty) => {
+    const settings = getDifficultySettings(difficulty);
+    setMaxNumber(settings.maxNumber);
+    setSelectedDifficulty(difficulty);
     setShowModal(false);
     initializeBoard();
   };
@@ -182,7 +189,7 @@ const CountingGame: React.FC = () => {
 
   const resetGame = () => {
     setShowModal(true);
-    setInputMaxNumber(maxNumber.toString());
+    setSelectedDifficulty(null);
     setStartTime(null);
     setElapsedTime(0);
     setGameTime(0);
@@ -193,27 +200,42 @@ const CountingGame: React.FC = () => {
       {showModal && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <h2>🔢 숫자 놀이 설정</h2>
-            <p>몇까지 숫자를 찾고 싶나요?</p>
-            <div className="input-group">
-              <label htmlFor="maxNumber">최대 숫자 (10-50):</label>
-              <input
-                id="maxNumber"
-                type="number"
-                min="10"
-                max="50"
-                value={inputMaxNumber}
-                onChange={(e) => setInputMaxNumber(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && startGame()}
-              />
+            <h2>🔢 숫자 놀이 게임</h2>
+            <p>원하는 난이도를 선택해주세요!</p>
+            <div className="difficulty-buttons">
+              <button 
+                className={`difficulty-button easy ${selectedDifficulty === 'easy' ? 'selected' : ''}`}
+                onClick={() => setSelectedDifficulty('easy')}
+              >
+                <div className="difficulty-label">🌱 쉬움</div>
+                <div className="difficulty-range">1~10</div>
+              </button>
+              <button 
+                className={`difficulty-button normal ${selectedDifficulty === 'normal' ? 'selected' : ''}`}
+                onClick={() => setSelectedDifficulty('normal')}
+              >
+                <div className="difficulty-label">🎯 보통</div>
+                <div className="difficulty-range">1~20</div>
+              </button>
+              <button 
+                className={`difficulty-button hard ${selectedDifficulty === 'hard' ? 'selected' : ''}`}
+                onClick={() => setSelectedDifficulty('hard')}
+              >
+                <div className="difficulty-label">🔥 어려움</div>
+                <div className="difficulty-range">1~30</div>
+              </button>
             </div>
             <div className="modal-buttons">
-              <button className="start-button" onClick={startGame}>
+              <button 
+                className="start-button" 
+                onClick={() => selectedDifficulty && startGame(selectedDifficulty)}
+                disabled={!selectedDifficulty}
+              >
                 게임 시작!
               </button>
             </div>
             <div className="modal-info">
-              <p>💡 추천: 처음이라면 20부터 시작해보세요!</p>
+              <p>💡 추천: 처음이라면 '보통' 난이도부터 시작해보세요!</p>
               <p>🎯 항상 최대 10개 타일이 보드에 유지되어 게임이 더 재미있어요!</p>
               <p>🌟 게임 후반부에는 남은 숫자만큼 타일이 줄어들어 난이도가 조절됩니다!</p>
             </div>
