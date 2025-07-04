@@ -176,6 +176,11 @@
   border-radius: 16px;
   padding: 1.5rem;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
 }
 
 .game-progress {
@@ -238,10 +243,69 @@
   to { background-position: 20px 0; }
 }
 
+.current-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.game-status {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.timer-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-status p {
+  margin: 0.3rem 0;
+}
+
+.timer-section p {
+  margin: 0;
+}
+
 .current-info p {
   font-size: 1.2rem;
   margin: 0.5rem 0;
   color: #333;
+}
+
+.timer-display {
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  font-size: 1.3rem !important;
+  color: #667eea;
+  background: rgba(102, 126, 234, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  display: inline-block;
+  min-width: 120px;
+}
+
+.final-time {
+  font-size: 1.1rem !important;
+  color: #27ae60;
+  font-weight: 600;
+}
+
+.time-value {
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  font-size: 1.2em;
+  background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 8px;
+  display: inline-block;
+  margin-left: 0.5rem;
 }
 
 .current-number {
@@ -421,6 +485,26 @@
   .progress-bar {
     height: 10px;
   }
+
+  .game-info {
+    height: 160px;
+    padding: 1rem;
+  }
+
+  .timer-display {
+    font-size: 1.1rem !important;
+    min-width: 100px;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .final-time {
+    font-size: 1rem !important;
+  }
+
+  .time-value {
+    font-size: 1.1em;
+    padding: 0.25rem 0.6rem;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -479,6 +563,26 @@
   .progress-bar {
     height: 8px;
   }
+
+  .game-info {
+    height: 140px;
+    padding: 0.8rem;
+  }
+
+  .timer-display {
+    font-size: 1rem !important;
+    min-width: 90px;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .final-time {
+    font-size: 0.9rem !important;
+  }
+
+  .time-value {
+    font-size: 1em;
+    padding: 0.2rem 0.5rem;
+  }
 }
 
 /* 가로 모드 모바일 */
@@ -533,6 +637,22 @@
   .game-info {
     padding: 1rem;
     margin-bottom: 1rem;
+    height: 120px;
+  }
+
+  .timer-display {
+    font-size: 1rem !important;
+    min-width: 80px;
+    padding: 0.3rem 0.5rem;
+  }
+
+  .final-time {
+    font-size: 0.9rem !important;
+  }
+
+  .time-value {
+    font-size: 0.9em;
+    padding: 0.2rem 0.4rem;
   }
 
   .game-board {

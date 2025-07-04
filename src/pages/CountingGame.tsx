@@ -16,6 +16,9 @@ const CountingGame: React.FC = () => {
   const [lastClickedNumber, setLastClickedNumber] = useState<number>(0);
   const [showModal, setShowModal] = useState<boolean>(true);
   const [inputMaxNumber, setInputMaxNumber] = useState<string>('20');
+  const [startTime, setStartTime] = useState<number | null>(null);
+  const [elapsedTime, setElapsedTime] = useState<number>(0);
+  const [gameTime, setGameTime] = useState<number>(0);
 
   // 게임 시작 함수
   const startGame = () => {
@@ -65,6 +68,9 @@ const CountingGame: React.FC = () => {
     setGameStarted(false);
     setGameCompleted(false);
     setLastClickedNumber(0);
+    setStartTime(null);
+    setElapsedTime(0);
+    setGameTime(0);
   }, []);
 
   // 타일 클릭 핸들러
@@ -76,10 +82,12 @@ const CountingGame: React.FC = () => {
       
       if (!gameStarted && tile.value === 1) {
         setGameStarted(true);
+        setStartTime(Date.now());
       }
 
       if (tile.value === maxNumber) {
         setGameCompleted(true);
+        setGameTime(elapsedTime);
         return;
       }
 
@@ -141,9 +149,43 @@ const CountingGame: React.FC = () => {
     }
   }, [initializeBoard, showModal]);
 
+  // 타이머 useEffect
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    
+    if (startTime && !gameCompleted) {
+      interval = setInterval(() => {
+        setElapsedTime(Date.now() - startTime);
+      }, 10); // 0.01초마다 업데이트
+    }
+
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
+  }, [startTime, gameCompleted]);
+
+  // 시간 포맷팅 함수
+  const formatTime = (milliseconds: number): string => {
+    const totalSeconds = Math.floor(milliseconds / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    const ms = Math.floor((milliseconds % 1000) / 10);
+    
+    if (minutes > 0) {
+      return `${minutes}:${seconds.toString().padStart(2, '0')}.${ms.toString().padStart(2, '0')}`;
+    } else {
+      return `${seconds}.${ms.toString().padStart(2, '0')}초`;
+    }
+  };
+
   const resetGame = () => {
     setShowModal(true);
     setInputMaxNumber(maxNumber.toString());
+    setStartTime(null);
+    setElapsedTime(0);
+    setGameTime(0);
   };
 
   return (
@@ -201,16 +243,27 @@ const CountingGame: React.FC = () => {
             </div>
           </div>
           <div className="current-info">
-            {!gameStarted ? (
-              <p>1번 타일을 클릭해서 게임을 시작하세요!</p>
-            ) : gameCompleted ? (
-              <p className="completed">🎉 축하합니다! {maxNumber}까지 모두 찾았어요!</p>
-            ) : (
-              <div>
-                <p>찾는 숫자: <span className="current-number">{currentNumber}</span></p>
-                <p>마지막 클릭: <span className="last-number">{lastClickedNumber}</span></p>
-              </div>
-            )}
+            <div className="game-status">
+              {!gameStarted ? (
+                <p>1번 타일을 클릭해서 게임을 시작하세요!</p>
+              ) : gameCompleted ? (
+                <p className="completed">🎉 축하합니다! {maxNumber}까지 모두 찾았어요!</p>
+              ) : (
+                <>
+                  <p>찾는 숫자: <span className="current-number">{currentNumber}</span></p>
+                  <p>마지막 클릭: <span className="last-number">{lastClickedNumber}</span></p>
+                </>
+              )}
+            </div>
+            <div className="timer-section">
+              {!gameStarted ? (
+                <p className="timer-display">⏱️ 준비중...</p>
+              ) : gameCompleted ? (
+                <p className="final-time">⏱️ 완주 시간: <span className="time-value">{formatTime(gameTime)}</span></p>
+              ) : (
+                <p className="timer-display">⏱️ {formatTime(elapsedTime)}</p>
+              )}
+            </div>
           </div>
         </div>
       )}
