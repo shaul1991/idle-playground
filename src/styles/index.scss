@@ -1,10 +1,8 @@
+// 새로운 디자인 시스템 색상 가져오기
+@import './colors';
+
 // 변수 정의
 $font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-$background-light: #f7f9fc;
-$background-dark: #1a1a1a;
-$background-white: #ffffff;
-$text-white: #ffffff;
-$text-black: #000000;
 
 $font-size-base: 16px;
 $font-size-mobile: 14px;
@@ -81,9 +79,9 @@ body {
   // 모바일 최적화
   overflow-x: hidden;
 
-  // 메인 앱 배경 그라데이션 (전체 스크롤 영역 덮음)
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  background-attachment: fixed; // 배경 고정으로 스크롤과 관계없이 전체 덮음
+  // 새로운 디자인 시스템의 배경색
+  background: var(--bg-primary);
+  color: var(--text-primary);
   min-height: 100vh;
   min-height: 100dvh; // 동적 뷰포트 높이
 }
@@ -174,17 +172,8 @@ button,
 // 고대비 모드 지원
 @media (prefers-contrast: high) {
   body {
-    background-color: $background-white;
-    color: $text-black;
-  }
-}
-
-// 다크 모드 지원 준비  
-@media (prefers-color-scheme: dark) {
-  body {
-    // 다크 모드에서도 동일한 그라데이션 배경 유지
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    background-attachment: fixed;
-    color: $text-white;
+    // 고대비 모드에서는 강한 대비 사용
+    background: var(--bg-primary) !important;
+    color: var(--text-strong) !important;
   }
 } 

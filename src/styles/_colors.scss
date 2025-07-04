@@ -1,0 +1,114 @@
+// ===========================================
+// 🎨 Design System Colors
+// ===========================================
+
+// -----------------------------------------
+// 🌞 Light Mode Colors
+// -----------------------------------------
+
+$color-bg-primary:      #FAF8F4;   // 기본 배경 – 웜톤 아이보리
+$color-bg-secondary:    #F1EEE9;   // 보조 배경 – 연한 베이지
+
+$color-text-primary:    #4B4B4B;   // 본문 텍스트 – 부드러운 딥그레이
+$color-text-strong:     #5E462B;   // 강조 텍스트 – 브라운
+
+$color-button-bg:       #FFC069;   // 주요 버튼 – 따뜻한 주황색
+$color-button-text:     #3A2C15;   // 버튼 텍스트 – 짙은 브라운
+
+$color-link:            #996633;   // 링크 색상 – 소프트 브라운
+$color-warning:         #E27D60;   // 경고/에러 – 코랄
+
+// -----------------------------------------
+// 🌙 Dark Mode Colors
+// -----------------------------------------
+
+$color-dark-bg-primary:   #1E1B18;  // 기본 배경 – 딥 브라운
+$color-dark-bg-secondary: #2B2623;  // 보조 배경
+
+$color-dark-text-primary: #EDE8E2;  // 본문 텍스트 – 따뜻한 아이보리
+$color-dark-text-strong:  #F1CFA1;  // 강조 텍스트
+
+$color-dark-button-bg:    #D9A066;  // 버튼 배경 – 황토색 계열
+$color-dark-button-text:  #2D2215;  // 버튼 텍스트
+
+$color-dark-link:         #C9A36E;  // 링크 색상 – 따뜻한 베이지
+$color-dark-warning:      #E27D60;  // 경고 – 동일한 코랄
+
+// -----------------------------------------
+// 공통 색상
+// -----------------------------------------
+
+$color-border-light:      #DAD5CC;   // 테두리/구분선
+$color-border-dark:       #3C352F;
+
+$color-focus-outline:     #FFDC99;   // 포커스 링
+
+// -----------------------------------------
+// 게임별 특화 색상
+// -----------------------------------------
+
+// 숫자 놀이 게임 색상
+$game-primary:           linear-gradient(135deg, #FFC069 0%, #E2A14B 100%);
+$game-secondary:         linear-gradient(135deg, #D9A066 0%, #C1875A 100%);
+$game-success:           linear-gradient(135deg, #7FBC79 0%, #6BA565 100%);
+$game-accent:            linear-gradient(135deg, #E27D60 0%, #D46B4F 100%);
+$game-progress:          linear-gradient(135deg, #FFDC99 0%, #F7D485 100%);
+
+// 투명도 색상
+$overlay-light:          rgba(0, 0, 0, 0.6);
+$overlay-dark:           rgba(0, 0, 0, 0.8);
+$glass-light:            rgba(255, 255, 255, 0.9);
+$glass-dark:             rgba(43, 38, 35, 0.9);
+
+// 그림자 색상
+$shadow-light:           rgba(0, 0, 0, 0.08);
+$shadow-medium:          rgba(0, 0, 0, 0.12);
+$shadow-strong:          rgba(0, 0, 0, 0.16);
+
+// -----------------------------------------
+// 테마 변수 (CSS Custom Properties 지원)
+// -----------------------------------------
+
+:root {
+  // Light mode (기본값)
+  --bg-primary: #{$color-bg-primary};
+  --bg-secondary: #{$color-bg-secondary};
+  --text-primary: #{$color-text-primary};
+  --text-strong: #{$color-text-strong};
+  --button-bg: #{$color-button-bg};
+  --button-text: #{$color-button-text};
+  --link-color: #{$color-link};
+  --warning-color: #{$color-warning};
+  --border-color: #{$color-border-light};
+  --focus-outline: #{$color-focus-outline};
+}
+
+// Dark mode
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #{$color-dark-bg-primary};
+    --bg-secondary: #{$color-dark-bg-secondary};
+    --text-primary: #{$color-dark-text-primary};
+    --text-strong: #{$color-dark-text-strong};
+    --button-bg: #{$color-dark-button-bg};
+    --button-text: #{$color-dark-button-text};
+    --link-color: #{$color-dark-link};
+    --warning-color: #{$color-dark-warning};
+    --border-color: #{$color-border-dark};
+    --focus-outline: #{$color-focus-outline};
+  }
+}
+
+// 다크모드 강제 적용 클래스
+.dark-mode {
+  --bg-primary: #{$color-dark-bg-primary};
+  --bg-secondary: #{$color-dark-bg-secondary};
+  --text-primary: #{$color-dark-text-primary};
+  --text-strong: #{$color-dark-text-strong};
+  --button-bg: #{$color-dark-button-bg};
+  --button-text: #{$color-dark-button-text};
+  --link-color: #{$color-dark-link};
+  --warning-color: #{$color-dark-warning};
+  --border-color: #{$color-border-dark};
+  --focus-outline: #{$color-focus-outline};
+} 

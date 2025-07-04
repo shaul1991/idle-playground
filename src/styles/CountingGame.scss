@@ -1,16 +1,5 @@
-// 변수 정의
-$primary-gradient: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
-$modal-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-$success-gradient: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
-$accent-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-$progress-gradient: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-
-$white-transparent: rgba(255, 255, 255, 0.9);
-$black-transparent: rgba(0, 0, 0, 0.7);
-$blue-light: rgba(102, 126, 234, 0.1);
-$shadow-light: rgba(0, 0, 0, 0.1);
-$shadow-medium: rgba(0, 0, 0, 0.15);
-$shadow-dark: rgba(0, 0, 0, 0.3);
+// 새로운 디자인 시스템 색상 가져오기
+@import './colors';
 
 $border-radius-sm: 8px;
 $border-radius-md: 12px;
@@ -37,9 +26,9 @@ $font-mono: 'Courier New', monospace;
 }
 
 @mixin glass-card {
-  background: $white-transparent;
+  background: $glass-light;
   border-radius: $border-radius-lg;
-  box-shadow: 0 4px 16px $shadow-light;
+  box-shadow: 0 4px 16px $shadow-medium;
   backdrop-filter: blur(10px);
 }
 
@@ -54,10 +43,11 @@ $font-mono: 'Courier New', monospace;
 // 기본 스타일
 .counting-game {
   min-height: 100vh;
-  background: transparent; // body에서 배경을 처리하므로 투명으로 설정
+  background: var(--bg-primary);
   padding: 1rem;
   font-family: $font-family;
   position: relative;
+  color: var(--text-primary);
 }
 
 // 모달 스타일
@@ -67,7 +57,7 @@ $font-mono: 'Courier New', monospace;
   left: 0;
   right: 0;
   bottom: 0;
-  background: $black-transparent;
+  background: $overlay-light;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -77,23 +67,24 @@ $font-mono: 'Courier New', monospace;
 
 .modal-content {
   @include glass-card;
-  background: white;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
   border-radius: $border-radius-xl;
   padding: 2rem;
   max-width: 400px;
   width: 90%;
   text-align: center;
-  box-shadow: 0 20px 40px $shadow-dark;
+  box-shadow: 0 20px 40px $shadow-strong;
   animation: modalSlideIn 0.3s ease-out;
 
   h2 {
-    color: #333;
+    color: var(--text-strong);
     font-size: 2rem;
     margin: 0 0 1rem 0;
   }
 
   p {
-    color: #666;
+    color: var(--text-primary);
     font-size: 1.1rem;
     margin: 0 0 1.5rem 0;
   }
@@ -104,6 +95,7 @@ $font-mono: 'Courier New', monospace;
     opacity: 0;
     transform: translateY(-50px) scale(0.9);
   }
+
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -115,7 +107,7 @@ $font-mono: 'Courier New', monospace;
 
   label {
     display: block;
-    color: #333;
+    color: var(--text-strong);
     font-weight: 600;
     margin-bottom: 0.5rem;
     font-size: 1.1rem;
@@ -124,17 +116,19 @@ $font-mono: 'Courier New', monospace;
   input {
     width: 100%;
     padding: 1rem;
-    border: 2px solid #e1e5e9;
+    border: 2px solid var(--border-color);
     border-radius: $border-radius-md;
     font-size: 1.2rem;
     text-align: center;
     transition: all 0.3s ease;
     box-sizing: border-box;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
 
     &:focus {
       outline: none;
-      border-color: #667eea;
-      box-shadow: 0 0 0 3px $blue-light;
+      border-color: var(--focus-outline);
+      box-shadow: 0 0 0 3px rgba(255, 220, 153, 0.3);
     }
   }
 }
@@ -142,9 +136,9 @@ $font-mono: 'Courier New', monospace;
 // 완료 모달 스타일
 .completion-modal {
   text-align: center;
-  
+
   h2 {
-    color: #27ae60;
+    color: #7FBC79;
     font-size: 2.2rem;
     margin: 0 0 1.5rem 0;
     animation: bounce 0.6s ease infinite alternate;
@@ -153,23 +147,23 @@ $font-mono: 'Courier New', monospace;
 
 .completion-stats {
   margin: 1.5rem 0;
-  
+
   .difficulty-completed {
     font-size: 1.3rem;
     font-weight: 600;
-    color: #667eea;
+    color: var(--text-strong);
     margin: 0 0 0.5rem 0;
   }
-  
+
   .range-completed {
     font-size: 1.1rem;
-    color: #666;
+    color: var(--text-primary);
     margin: 0 0 1.5rem 0;
   }
 }
 
 .final-time-display {
-  background: $success-gradient;
+  background: $game-success;
   border-radius: $border-radius-lg;
   padding: 1.5rem;
   margin: 1rem 0;
@@ -177,14 +171,14 @@ $font-mono: 'Courier New', monospace;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  
+
   .time-label {
     font-size: 1rem;
     color: white;
     font-weight: 500;
     opacity: 0.9;
   }
-  
+
   .time-value-large {
     font-size: 2rem;
     font-weight: bold;
@@ -208,22 +202,22 @@ $font-mono: 'Courier New', monospace;
   padding: 1rem 1.5rem;
   font-size: 1.1rem;
   font-weight: 600;
-  
+
   &:active {
     transform: translateY(0);
   }
 }
 
 .play-again-button {
-  background: $modal-gradient;
-  color: white;
-  box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+  background: $game-primary;
+  color: var(--button-text);
+  box-shadow: 0 8px 16px rgba(255, 192, 105, 0.3);
 }
 
 .other-games-button {
-  background: $accent-gradient;
+  background: $game-accent;
   color: white;
-  box-shadow: 0 8px 16px rgba(240, 147, 251, 0.3);
+  box-shadow: 0 8px 16px rgba(226, 125, 96, 0.3);
 }
 
 .difficulty-buttons {
@@ -235,8 +229,8 @@ $font-mono: 'Courier New', monospace;
 
 .difficulty-button {
   @include button-base;
-  background: rgba(255, 255, 255, 0.9);
-  border: 2px solid #e1e5e9;
+  background: var(--bg-secondary);
+  border: 2px solid var(--border-color);
   padding: 1rem;
   text-align: center;
   transition: all 0.3s ease;
@@ -244,35 +238,37 @@ $font-mono: 'Courier New', monospace;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  
+  color: var(--text-primary);
+
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 16px $shadow-medium;
-    border-color: #667eea;
+    border-color: var(--focus-outline);
+    background: var(--bg-primary);
   }
-  
+
   &.selected {
-    background: $modal-gradient;
-    border-color: #667eea;
-    color: white;
+    background: $game-primary;
+    border-color: var(--focus-outline);
+    color: var(--button-text);
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 8px 20px rgba(255, 192, 105, 0.4);
   }
-  
+
   .difficulty-label {
     font-size: 1.2rem;
     font-weight: 600;
     margin: 0;
     line-height: 1.2;
   }
-  
+
   .difficulty-range {
     font-size: 1rem;
     opacity: 0.8;
     margin: 0.25rem 0 0 0;
     line-height: 1.2;
   }
-  
+
   &.selected .difficulty-range {
     opacity: 1;
   }
@@ -285,11 +281,11 @@ $font-mono: 'Courier New', monospace;
 .start-button {
   @include button-base;
   @include hover-lift;
-  background: $modal-gradient;
-  color: white;
+  background: $game-primary;
+  color: var(--button-text);
   padding: 1rem 2rem;
   font-size: 1.2rem;
-  box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 8px 16px rgba(255, 192, 105, 0.3);
   width: 100%;
 
   &:active {
@@ -297,8 +293,9 @@ $font-mono: 'Courier New', monospace;
   }
 
   &:disabled {
-    background: rgba(0, 0, 0, 0.2);
-    color: rgba(255, 255, 255, 0.5);
+    background: var(--border-color);
+    color: var(--text-primary);
+    opacity: 0.5;
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
@@ -311,14 +308,14 @@ $font-mono: 'Courier New', monospace;
 }
 
 .modal-info {
-  background: $progress-gradient;
   border-radius: $border-radius-md;
   padding: 1rem;
   margin-top: 1rem;
+  border: 1px solid var(--border-color);
 
   p {
     margin: 0.5rem 0;
-    color: #333;
+    color: var(--text-strong);
     font-size: 0.9rem;
     font-weight: 500;
 
@@ -345,7 +342,7 @@ $font-mono: 'Courier New', monospace;
   h1 {
     font-size: 2.5rem;
     margin: 0;
-    color: #333;
+    color: var(--text-strong);
     text-shadow: 2px 2px 4px $shadow-light;
     flex-shrink: 1; // 필요시 축소 가능
     min-width: 0; // 축소 시 최소값 제한 없음
@@ -356,18 +353,23 @@ $font-mono: 'Courier New', monospace;
 .reset-button {
   @include button-base;
   @include hover-lift;
-  background: $white-transparent;
+  background: var(--bg-secondary);
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
-  color: #333;
+  color: var(--text-strong);
   box-shadow: 0 4px 12px $shadow-light;
+  border: 1px solid var(--border-color);
   flex-shrink: 0; // 버튼 크기 유지
   white-space: nowrap; // 텍스트 줄바뀜 방지
+
+  &:hover {
+    background: var(--bg-primary);
+    border-color: var(--focus-outline);
+  }
 }
 
 // 게임 정보
 .game-info {
-  @include glass-card;
   text-align: center;
   margin-bottom: 2rem;
   padding: 1.5rem;
@@ -375,6 +377,9 @@ $font-mono: 'Courier New', monospace;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  border-radius: $border-radius-lg;
+  box-shadow: 0 4px 16px $shadow-light;
+  border: 1px solid var(--border-color);
   // overflow: hidden 제거하여 내용이 잘리지 않도록 함
 }
 
@@ -384,28 +389,31 @@ $font-mono: 'Courier New', monospace;
   p {
     margin: 0 0 1rem 0;
     font-size: 1.1rem;
-    color: #333;
+    color: var(--text-primary);
   }
 }
 
 .max-number {
-  @include gradient-text($accent-gradient);
+  @include gradient-text($game-accent);
+  color: var(--button-text);
   padding: 0.3rem 0.8rem;
   margin: 0 0.2rem;
+  box-shadow: 0 2px 4px rgba(255, 192, 105, 0.3);
 }
 
 .progress-bar {
   width: 100%;
   height: 12px;
-  background: rgba(255, 255, 255, 0.5);
+  background: var(--bg-secondary);
   border-radius: 6px;
   overflow: hidden;
   box-shadow: inset 0 2px 4px $shadow-light;
+  border: 1px solid var(--border-color);
 }
 
 .progress-fill {
   height: 100%;
-  background: $modal-gradient;
+  background: $game-primary;
   transition: width 0.5s ease;
   border-radius: 6px;
   position: relative;
@@ -417,21 +425,26 @@ $font-mono: 'Courier New', monospace;
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(45deg, 
-      transparent 25%, 
-      rgba(255, 255, 255, 0.2) 25%, 
-      rgba(255, 255, 255, 0.2) 50%, 
-      transparent 50%, 
-      transparent 75%, 
-      rgba(255, 255, 255, 0.2) 75%);
+    background: linear-gradient(45deg,
+        transparent 25%,
+        rgba(255, 255, 255, 0.2) 25%,
+        rgba(255, 255, 255, 0.2) 50%,
+        transparent 50%,
+        transparent 75%,
+        rgba(255, 255, 255, 0.2) 75%);
     background-size: 20px 20px;
     animation: progressStripes 1s linear infinite;
   }
 }
 
 @keyframes progressStripes {
-  from { background-position: 0 0; }
-  to { background-position: 20px 0; }
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 20px 0;
+  }
 }
 
 .current-info {
@@ -439,11 +452,12 @@ $font-mono: 'Courier New', monospace;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  gap: 0.5rem;
 
   p {
     font-size: 1.2rem;
     margin: 0.5rem 0;
-    color: #333;
+    color: var(--text-primary);
   }
 }
 
@@ -474,22 +488,23 @@ $font-mono: 'Courier New', monospace;
   font-family: $font-mono;
   font-weight: bold;
   font-size: 1.3rem !important;
-  color: #667eea;
-  background: $blue-light;
+  color: var(--text-strong);
+  background: var(--bg-secondary);
   padding: 0.5rem 1rem;
   border-radius: $border-radius-md;
+  border: 1px solid var(--border-color);
   display: inline-block;
   min-width: 120px;
 }
 
 .final-time {
   font-size: 1.1rem !important;
-  color: #27ae60;
+  color: #7FBC79;
   font-weight: 600;
 }
 
 .time-value {
-  @include gradient-text($success-gradient);
+  @include gradient-text($game-success);
   font-family: $font-mono;
   font-size: 1.2em;
   padding: 0.3rem 0.8rem;
@@ -497,14 +512,13 @@ $font-mono: 'Courier New', monospace;
 }
 
 .current-number {
-  @include gradient-text($accent-gradient);
+  @include gradient-text($game-accent);
+  color: var(--button-text);
   padding: 0.5rem 1rem;
   font-size: 1.5rem;
   margin: 0 0.5rem;
-  box-shadow: 0 8px 16px rgba(240, 147, 251, 0.4);
+  box-shadow: 0 2px 4px rgba(255, 192, 105, 0.3);
 }
-
-
 
 .completed {
   font-size: 1.5rem !important;
@@ -514,8 +528,13 @@ $font-mono: 'Courier New', monospace;
 }
 
 @keyframes bounce {
-  from { transform: translateY(0px); }
-  to { transform: translateY(-10px); }
+  from {
+    transform: translateY(0px);
+  }
+
+  to {
+    transform: translateY(-10px);
+  }
 }
 
 // 게임 보드
@@ -543,14 +562,14 @@ $font-mono: 'Courier New', monospace;
   overflow: hidden;
 
   &.visible {
-    background: $modal-gradient;
-    color: white;
-    box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+    background: $game-primary;
+    color: var(--button-text);
+    box-shadow: 0 8px 16px rgba(255, 192, 105, 0.3);
     border: 3px solid rgba(255, 255, 255, 0.2);
 
     &:hover {
       transform: scale(1.05);
-      box-shadow: 0 12px 24px rgba(102, 126, 234, 0.4);
+      box-shadow: 0 12px 24px rgba(255, 192, 105, 0.4);
     }
 
     &:active {
@@ -559,32 +578,41 @@ $font-mono: 'Courier New', monospace;
   }
 
   &.empty {
-    background: rgba(255, 255, 255, 0.3);
-    border: 2px dashed rgba(255, 255, 255, 0.5);
+    background: var(--bg-secondary);
+    border: 2px dashed var(--border-color);
     cursor: default;
   }
 
   &.target {
-    background: $accent-gradient;
+    background: $game-accent;
     animation: pulse 1.5s ease-in-out infinite;
-    box-shadow: 0 8px 16px rgba(240, 147, 251, 0.4);
+    box-shadow: 0 8px 16px rgba(226, 125, 96, 0.4);
   }
 }
 
 @keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
 }
 
 // 게임 지침
 .game-instructions {
   @include glass-card;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
   padding: 1.5rem;
   max-width: 500px;
   margin: 0 auto;
 
   h3 {
-    color: #333;
+    color: var(--text-strong);
     margin-top: 0;
     font-size: 1.3rem;
   }
@@ -595,11 +623,10 @@ $font-mono: 'Courier New', monospace;
   }
 
   li {
-    background: $progress-gradient;
     margin: 0.5rem 0;
     padding: 0.75rem 1rem;
     border-radius: $border-radius-sm;
-    color: #333;
+    color: var(--text-strong);
     font-weight: 500;
 
     &::before {
@@ -1031,4 +1058,4 @@ $font-mono: 'Courier New', monospace;
     font-size: 0.9em;
     padding: 0.2rem 0.4rem;
   }
-} 
+}
