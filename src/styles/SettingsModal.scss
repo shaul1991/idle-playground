@@ -1,0 +1,267 @@
+// 새로운 디자인 시스템 색상 가져오기
+@import './colors';
+
+$border-radius-sm: 8px;
+$border-radius-md: 12px;
+$border-radius-lg: 16px;
+$border-radius-xl: 24px;
+
+$font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+// 설정 모달 오버레이
+.settings-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: $overlay-light;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+  animation: fadeIn 0.2s ease-out;
+}
+
+// 설정 모달 콘텐츠
+.settings-modal-content {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius-xl;
+  padding: 0;
+  max-width: 400px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 40px $shadow-strong;
+  animation: slideIn 0.3s ease-out;
+}
+
+// 설정 헤더
+.settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem 1rem 2rem;
+  border-bottom: 1px solid var(--border-color);
+
+  h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--text-strong);
+    font-weight: 600;
+  }
+
+  .close-button {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: $border-radius-sm;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: var(--bg-secondary);
+      color: var(--text-strong);
+    }
+  }
+}
+
+// 설정 섹션
+.settings-section {
+  padding: 1.5rem 2rem;
+
+  h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1.1rem;
+    color: var(--text-strong);
+    font-weight: 600;
+  }
+}
+
+// 테마 옵션들
+.theme-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.theme-option {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-radius: $border-radius-md;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+
+  &:hover {
+    background: var(--bg-secondary);
+  }
+
+  &.selected {
+    background: var(--bg-secondary);
+    border-color: var(--focus-outline);
+    box-shadow: 0 4px 12px rgba(255, 220, 153, 0.2);
+  }
+
+  .theme-icon {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    flex-shrink: 0;
+  }
+
+  .theme-info {
+    flex: 1;
+
+    .theme-name {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-strong);
+      margin-bottom: 0.2rem;
+    }
+
+    .theme-description {
+      font-size: 0.85rem;
+      color: var(--text-primary);
+      opacity: 0.8;
+    }
+  }
+
+  .theme-radio {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+
+    .radio-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--focus-outline);
+      border-radius: 50%;
+    }
+  }
+
+  &.selected .theme-radio {
+    border-color: var(--focus-outline);
+  }
+}
+
+// 설정 푸터
+.settings-footer {
+  padding: 1rem 2rem 1.5rem 2rem;
+  border-top: 1px solid var(--border-color);
+
+  .done-button {
+    width: 100%;
+    background: $game-primary;
+    color: var(--button-text);
+    border: none;
+    border-radius: $border-radius-md;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(255, 192, 105, 0.3);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(255, 192, 105, 0.4);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+// 애니메이션
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+// 반응형 디자인
+@media screen and (max-width: 480px) {
+  .settings-modal-content {
+    width: 95%;
+    max-width: none;
+  }
+
+  .settings-header {
+    padding: 1rem 1.5rem 0.8rem 1.5rem;
+
+    h2 {
+      font-size: 1.3rem;
+    }
+  }
+
+  .settings-section {
+    padding: 1rem 1.5rem;
+
+    h3 {
+      font-size: 1rem;
+    }
+  }
+
+  .theme-option {
+    padding: 0.8rem;
+
+    .theme-icon {
+      font-size: 1.3rem;
+      margin-right: 0.8rem;
+    }
+
+    .theme-info {
+      .theme-name {
+        font-size: 0.9rem;
+      }
+
+      .theme-description {
+        font-size: 0.8rem;
+      }
+    }
+
+    .theme-radio {
+      width: 18px;
+      height: 18px;
+
+      .radio-dot {
+        width: 8px;
+        height: 8px;
+      }
+    }
+  }
+
+  .settings-footer {
+    padding: 0.8rem 1.5rem 1rem 1.5rem;
+
+    .done-button {
+      padding: 0.7rem 1.2rem;
+      font-size: 0.9rem;
+    }
+  }
+} 

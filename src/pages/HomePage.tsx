@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import SettingsModal from '../components/SettingsModal';
 import '../styles/App.scss';
 
 interface Game {
@@ -12,11 +13,25 @@ interface Game {
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   
   // Environment variables from HEAD branch
   const env = process.env.REACT_APP_ENV;
   const version = process.env.REACT_APP_VERSION;
   const debugMode = process.env.REACT_APP_DEBUG === 'true';
+
+  // 모달 스크롤 방지
+  useEffect(() => {
+    if (isSettingsOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isSettingsOpen]);
 
   // Games array from origin/main branch
   const games: Game[] = [
@@ -68,7 +83,16 @@ const HomePage: React.FC = () => {
   return (
     <div className="app">
       <header className="app-header">
-        <h1 className="title">🎨 idle-playground</h1>
+        <div className="header-top">
+          <h1 className="title">🎨 idle-playground</h1>
+          <button 
+            className="settings-button"
+            onClick={() => setIsSettingsOpen(true)}
+            aria-label="설정"
+          >
+            ⚙️
+          </button>
+        </div>
         <p className="subtitle">아이들을 위한 인터랙티브 놀이터</p>
         
         {debugMode && (
@@ -96,6 +120,11 @@ const HomePage: React.FC = () => {
           ))}
         </div>
       </main>
+
+      <SettingsModal 
+        isOpen={isSettingsOpen} 
+        onClose={() => setIsSettingsOpen(false)} 
+      />
     </div>
   );
 };
