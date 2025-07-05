@@ -69,7 +69,7 @@ const HomePage: React.FC = () => {
     },
     {
       id: 'colors',
-      title: '색깔 놀이',
+      title: '색깔/모형 놀이',
       emoji: '🌈',
       isReady: true,
       path: '/colors',

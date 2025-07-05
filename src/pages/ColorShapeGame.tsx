@@ -226,7 +226,7 @@ const ColorShapeGame: React.FC = () => {
 
   return (
     <Layout 
-      title="🌈 색깔 놀이"
+      title="🌈 색깔/모형 놀이"
       headerActions={
         <button 
           className="settings-button"
@@ -242,7 +242,7 @@ const ColorShapeGame: React.FC = () => {
         {showStartModal && (
           <div className="modal-overlay">
             <div className="modal-content">
-              <h2>🌈 색깔 놀이</h2>
+              <h2>🌈 색깔/모형 놀이</h2>
               <p>제시된 색깔이나 도형을 찾아보세요!</p>
               <div className="game-rules">
                 <h3>게임 방법</h3>
@@ -352,7 +352,7 @@ const ColorShapeGame: React.FC = () => {
                     <div 
                       className="shape-sample"
                       style={{ 
-                        color: gameState.difficulty === 'easy' ? neutralColor : '#666'
+                        color: 'white'
                       }}
                     >
                       {shapeEmojis[currentQuestion.target as ShapeType]}
