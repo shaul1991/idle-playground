@@ -123,7 +123,6 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
     .difficulty-button {
       @include button-base;
-      @include hover-lift;
       padding: 1.5rem;
       background: var(--bg-secondary);
       border: 2px solid var(--border-color);
@@ -131,26 +130,10 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       text-align: center;
       transition: all 0.3s ease;
 
-      &:hover {
-        border-color: var(--button-bg);
-        background: var(--button-bg);
-        color: var(--button-text);
-      }
-
-      &.easy {
-        &:hover {
-          background: #7FBC79;
-          border-color: #7FBC79;
-          color: white;
-        }
-      }
-
-      &.hard {
-        &:hover {
-          background: #E27D60;
-          border-color: #E27D60;
-          color: white;
-        }
+      &:focus {
+        outline: none;
+        border-color: var(--focus-outline);
+        box-shadow: 0 0 0 3px rgba(255, 220, 153, 0.3);
       }
 
       .difficulty-label {
@@ -163,6 +146,27 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         font-size: 0.9rem;
         opacity: 0.8;
         line-height: 1.3;
+      }
+    }
+
+    // 실제 마우스 호버 시에만 hover 효과 적용
+    .difficulty-button.hovered {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px $shadow-medium;
+      border-color: var(--button-bg);
+      background: var(--button-bg);
+      color: var(--button-text);
+
+      &.easy {
+        background: #7FBC79;
+        border-color: #7FBC79;
+        color: white;
+      }
+
+      &.hard {
+        background: #E27D60;
+        border-color: #E27D60;
+        color: white;
       }
     }
   }

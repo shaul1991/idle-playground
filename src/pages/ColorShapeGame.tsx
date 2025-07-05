@@ -263,13 +263,15 @@ const ColorShapeGame: React.FC = () => {
         {/* 난이도 선택 모달 */}
         {showDifficultyModal && (
           <div className="modal-overlay">
-            <div className="modal-content">
+            <div className="modal-content" tabIndex={-1}>
               <h2>난이도 선택</h2>
               <p>원하는 난이도를 선택해주세요!</p>
               <div className="difficulty-buttons">
                 <button 
                   className="difficulty-button easy"
                   onClick={() => startGame('easy')}
+                  onMouseEnter={(e) => e.currentTarget.classList.add('hovered')}
+                  onMouseLeave={(e) => e.currentTarget.classList.remove('hovered')}
                 >
                   <div className="difficulty-label">🌱 쉬움</div>
                   <div className="difficulty-description">색깔만 또는 도형만 나타남</div>
@@ -277,6 +279,8 @@ const ColorShapeGame: React.FC = () => {
                 <button 
                   className="difficulty-button hard"
                   onClick={() => startGame('hard')}
+                  onMouseEnter={(e) => e.currentTarget.classList.add('hovered')}
+                  onMouseLeave={(e) => e.currentTarget.classList.remove('hovered')}
                 >
                   <div className="difficulty-label">🔥 어려움</div>
                   <div className="difficulty-description">색깔과 도형이 함께 나타남</div>
