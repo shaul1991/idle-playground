@@ -64,15 +64,21 @@
         cursor: pointer;
         padding: 0.5rem;
         border-radius: 0.5rem;
-        transition: background-color 0.3s ease;
+        transition: all 0.3s ease;
         color: var(--text-color);
 
         &:hover {
           background-color: rgba(255, 255, 255, 0.1);
+          transform: translateY(-2px) rotate(90deg);
         }
 
         &:active {
-          transform: scale(0.95);
+          transform: translateY(0) rotate(90deg);
+        }
+
+        &:focus {
+          outline: 2px solid var(--focus-outline);
+          outline-offset: 2px;
         }
       }
     }

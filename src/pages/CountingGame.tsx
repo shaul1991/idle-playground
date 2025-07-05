@@ -230,7 +230,18 @@ const CountingGame: React.FC = () => {
   };
 
   return (
-    <Layout title="🔢 숫자 놀이">
+    <Layout 
+      title="🔢 숫자 놀이"
+      headerActions={
+        <button 
+          className="settings-button"
+          onClick={resetGame}
+          aria-label="설정 변경"
+        >
+          ⚙️
+        </button>
+      }
+    >
       <div className="counting-game">
         {showModal && (
           <div className="modal-overlay">
@@ -303,12 +314,6 @@ const CountingGame: React.FC = () => {
             </div>
           </div>
         )}
-
-        <div className="game-controls">
-          <button className="reset-button" onClick={resetGame}>
-            설정 변경
-          </button>
-        </div>
 
       {!showModal && (
         <div className="game-info">

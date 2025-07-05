@@ -47,31 +47,7 @@ $font-mono: 'Courier New', monospace;
   color: var(--text-primary);
 }
 
-// 게임 컨트롤 스타일
-.game-controls {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1rem;
 
-  .reset-button {
-    @include button-base;
-    @include hover-lift;
-    background: var(--button-bg);
-    color: var(--button-text);
-    padding: 0.7rem 1.5rem;
-    font-size: 1rem;
-    border-radius: $border-radius-md;
-
-    &:hover {
-      background: var(--link-color);
-      transform: translateY(-2px);
-    }
-
-    &:active {
-      transform: translateY(0);
-    }
-  }
-}
 
 // 모달 스타일
 .modal-overlay {
