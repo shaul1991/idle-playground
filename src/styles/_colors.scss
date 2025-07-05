@@ -81,6 +81,13 @@ $shadow-strong:          rgba(0, 0, 0, 0.16);
   --warning-color: #{$color-warning};
   --border-color: #{$color-border-light};
   --focus-outline: #{$color-focus-outline};
+  
+  // Layout 색상 변수
+  --background-color: #{$color-bg-primary};
+  --text-color: #{$color-text-primary};
+  --primary-color: #{$color-button-bg};
+  --secondary-color: #{$color-bg-secondary};
+  --accent-color: #FFE4B5;
 }
 
 // Dark mode
@@ -96,6 +103,17 @@ $shadow-strong:          rgba(0, 0, 0, 0.16);
     --warning-color: #{$color-dark-warning};
     --border-color: #{$color-border-dark};
     --focus-outline: #{$color-focus-outline};
+    
+    // Layout 색상 변수 (다크 모드)
+    --background-color: #{$color-dark-bg-primary};
+    --text-color: #{$color-dark-text-primary};
+    --primary-color: #{$color-dark-button-bg};
+    --secondary-color: #{$color-dark-bg-secondary};
+    --accent-color: #4A3729;
+    --primary-color-dark: #{$color-dark-button-bg};
+    --secondary-color-dark: #{$color-dark-bg-secondary};
+    --accent-color-dark: #4A3729;
+    --background-color-dark: #{$color-dark-bg-primary};
   }
 }
 

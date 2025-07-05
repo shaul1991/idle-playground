@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SettingsModal from '../components/SettingsModal';
-import '../styles/App.scss';
+import Layout from '../components/Layout';
+import '../styles/HomePage.scss';
 
 interface Game {
   id: string;
@@ -81,29 +82,32 @@ const HomePage: React.FC = () => {
   };
 
   return (
-    <div className="app">
-      <header className="app-header">
-        <div className="header-top">
-          <h1 className="title">🎨 idle-playground</h1>
-          <button 
-            className="settings-button"
-            onClick={() => setIsSettingsOpen(true)}
-            aria-label="설정"
-          >
-            ⚙️
-          </button>
+    <Layout 
+      title="🎨 idle-playground" 
+      showHomeButton={false}
+      showAdBanner={false}
+      headerActions={
+        <button 
+          className="settings-button"
+          onClick={() => setIsSettingsOpen(true)}
+          aria-label="설정"
+        >
+          ⚙️
+        </button>
+      }
+    >
+      <div className="home-page">
+        <div className="home-header">
+          <p className="subtitle">아이들을 위한 인터랙티브 놀이터</p>
+          
+          {debugMode && (
+            <div style={{ marginTop: '20px', fontSize: '14px', opacity: 0.7 }}>
+              <p>환경: {env}</p>
+              <p>버전: {version}</p>
+            </div>
+          )}
         </div>
-        <p className="subtitle">아이들을 위한 인터랙티브 놀이터</p>
-        
-        {debugMode && (
-          <div style={{ marginTop: '20px', fontSize: '14px', opacity: 0.7 }}>
-            <p>환경: {env}</p>
-            <p>버전: {version}</p>
-          </div>
-        )}
-      </header>
 
-      <main className="main-content">
         <div className="games-grid">
           {games.map(game => (
             <div
@@ -119,13 +123,13 @@ const HomePage: React.FC = () => {
             </div>
           ))}
         </div>
-      </main>
+      </div>
 
       <SettingsModal 
         isOpen={isSettingsOpen} 
         onClose={() => setIsSettingsOpen(false)} 
       />
-    </div>
+    </Layout>
   );
 };
 

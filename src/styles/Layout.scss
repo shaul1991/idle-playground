@@ -1,0 +1,239 @@
+@import 'colors';
+
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-color);
+}
+
+/* 헤더 영역 */
+.layout-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--primary-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem 0;
+
+  .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+
+    .home-button {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+
+    .page-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--text-color);
+      margin: 0;
+      text-align: center;
+      flex: 1;
+    }
+
+    .header-actions {
+      width: 3rem; // home-button과 같은 크기로 중앙 정렬 보장
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+
+      .settings-button {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        transition: background-color 0.3s ease;
+        color: var(--text-color);
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        &:active {
+          transform: scale(0.95);
+        }
+      }
+    }
+  }
+}
+
+/* 본문 영역 */
+.layout-main {
+  flex: 1;
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 광고 배너 영역 */
+.layout-ad-banner {
+  background-color: var(--accent-color);
+  padding: 1.5rem;
+  margin-top: auto;
+
+  .ad-banner-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    color: var(--text-color);
+
+    p {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+
+    small {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+  }
+}
+
+/* 푸터 영역 */
+.layout-footer {
+  background-color: var(--secondary-color);
+  padding: 2rem 1rem;
+  margin-top: auto;
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+
+    .footer-info {
+      flex: 1;
+      min-width: 200px;
+
+      h3 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.2rem;
+        color: var(--text-color);
+      }
+
+      p {
+        margin: 0;
+        color: var(--text-color);
+        opacity: 0.8;
+        font-size: 0.9rem;
+      }
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      .footer-link {
+        color: var(--text-color);
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: opacity 0.3s ease;
+
+        &:hover {
+          opacity: 0.8;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .layout-header {
+    .header-content {
+      padding: 0 0.5rem;
+
+      .page-title {
+        font-size: 1.2rem;
+      }
+
+      .home-button {
+        font-size: 1.2rem;
+        padding: 0.3rem;
+      }
+
+      .header-actions {
+        width: 2rem;
+
+        .settings-button {
+          font-size: 1.2rem;
+          padding: 0.3rem;
+        }
+      }
+    }
+  }
+
+  .layout-main {
+    padding: 1rem 0.5rem;
+  }
+
+  .layout-ad-banner {
+    padding: 1rem;
+  }
+
+  .layout-footer {
+    padding: 1.5rem 0.5rem;
+
+    .footer-content {
+      flex-direction: column;
+      text-align: center;
+      gap: 1rem;
+
+      .footer-links {
+        flex-direction: row;
+        justify-content: center;
+        gap: 2rem;
+      }
+    }
+  }
+}
+
+/* 다크 모드 대응 */
+@media (prefers-color-scheme: dark) {
+  .layout {
+    background-color: var(--background-color-dark);
+  }
+
+  .layout-header {
+    background-color: var(--primary-color-dark);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .layout-ad-banner {
+    background-color: var(--accent-color-dark);
+  }
+
+  .layout-footer {
+    background-color: var(--secondary-color-dark);
+  }
+} 

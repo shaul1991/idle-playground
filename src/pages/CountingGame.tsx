@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import Layout from '../components/Layout';
 import '../styles/CountingGame.scss';
 
 interface TileData {
@@ -229,88 +230,85 @@ const CountingGame: React.FC = () => {
   };
 
   return (
-    <div className="counting-game">
-      {showModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <h2>🔢 숫자 놀이 게임</h2>
-            <p>원하는 난이도를 선택해주세요!</p>
-            <div className="difficulty-buttons">
-              <button 
-                className={`difficulty-button easy ${selectedDifficulty === 'easy' ? 'selected' : ''}`}
-                onClick={() => setSelectedDifficulty('easy')}
-              >
-                <div className="difficulty-label">🌱 쉬움</div>
-                <div className="difficulty-range">1~10</div>
-              </button>
-              <button 
-                className={`difficulty-button normal ${selectedDifficulty === 'normal' ? 'selected' : ''}`}
-                onClick={() => setSelectedDifficulty('normal')}
-              >
-                <div className="difficulty-label">🎯 보통</div>
-                <div className="difficulty-range">1~20</div>
-              </button>
-              <button 
-                className={`difficulty-button hard ${selectedDifficulty === 'hard' ? 'selected' : ''}`}
-                onClick={() => setSelectedDifficulty('hard')}
-              >
-                <div className="difficulty-label">🔥 어려움</div>
-                <div className="difficulty-range">1~30</div>
-              </button>
-            </div>
-            <div className="modal-buttons">
-              <button 
-                className="start-button" 
-                onClick={() => selectedDifficulty && startGame(selectedDifficulty)}
-                disabled={!selectedDifficulty}
-              >
-                게임 시작!
-              </button>
-            </div>
-            <div className="modal-info">
-              <p>💡 추천: 처음이라면 '보통' 난이도부터 시작해보세요!</p>
-              <p>🎯 항상 최대 10개 타일이 보드에 유지되어 게임이 더 재미있어요!</p>
-              <p>🌟 게임 후반부에는 남은 숫자만큼 타일이 줄어들어 난이도가 조절됩니다!</p>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {showCompletionModal && (
-        <div className="modal-overlay">
-          <div className="modal-content completion-modal">
-            <h2>🎉 축하합니다!</h2>
-            <div className="completion-stats">
-              <p className="difficulty-completed">
-                {selectedDifficulty && getDifficultySettings(selectedDifficulty).label} 난이도 완주!
-              </p>
-              <p className="range-completed">1부터 {maxNumber}까지 모두 찾았어요!</p>
-              <div className="final-time-display">
-                <span className="time-label">완주 시간</span>
-                <span className="time-value-large">{formatTime(gameTime)}</span>
+    <Layout title="🔢 숫자 놀이">
+      <div className="counting-game">
+        {showModal && (
+          <div className="modal-overlay">
+            <div className="modal-content">
+              <h2>🔢 숫자 놀이 게임</h2>
+              <p>원하는 난이도를 선택해주세요!</p>
+              <div className="difficulty-buttons">
+                <button 
+                  className={`difficulty-button easy ${selectedDifficulty === 'easy' ? 'selected' : ''}`}
+                  onClick={() => setSelectedDifficulty('easy')}
+                >
+                  <div className="difficulty-label">🌱 쉬움</div>
+                  <div className="difficulty-range">1~10</div>
+                </button>
+                <button 
+                  className={`difficulty-button normal ${selectedDifficulty === 'normal' ? 'selected' : ''}`}
+                  onClick={() => setSelectedDifficulty('normal')}
+                >
+                  <div className="difficulty-label">🎯 보통</div>
+                  <div className="difficulty-range">1~20</div>
+                </button>
+                <button 
+                  className={`difficulty-button hard ${selectedDifficulty === 'hard' ? 'selected' : ''}`}
+                  onClick={() => setSelectedDifficulty('hard')}
+                >
+                  <div className="difficulty-label">🔥 어려움</div>
+                  <div className="difficulty-range">1~30</div>
+                </button>
+              </div>
+              <div className="modal-buttons">
+                <button 
+                  className="start-button" 
+                  onClick={() => selectedDifficulty && startGame(selectedDifficulty)}
+                  disabled={!selectedDifficulty}
+                >
+                  게임 시작!
+                </button>
+              </div>
+              <div className="modal-info">
+                <p>💡 추천: 처음이라면 '보통' 난이도부터 시작해보세요!</p>
+                <p>🎯 항상 최대 10개 타일이 보드에 유지되어 게임이 더 재미있어요!</p>
+                <p>🌟 게임 후반부에는 남은 숫자만큼 타일이 줄어들어 난이도가 조절됩니다!</p>
               </div>
             </div>
-            <div className="completion-buttons">
-              <button className="play-again-button" onClick={playAgain}>
-                🔄 다시하기
-              </button>
-              <button className="other-games-button" onClick={goToMainPage}>
-                🎮 다른 놀이보기
-              </button>
+          </div>
+        )}
+
+        {showCompletionModal && (
+          <div className="modal-overlay">
+            <div className="modal-content completion-modal">
+              <h2>🎉 축하합니다!</h2>
+              <div className="completion-stats">
+                <p className="difficulty-completed">
+                  {selectedDifficulty && getDifficultySettings(selectedDifficulty).label} 난이도 완주!
+                </p>
+                <p className="range-completed">1부터 {maxNumber}까지 모두 찾았어요!</p>
+                <div className="final-time-display">
+                  <span className="time-label">완주 시간</span>
+                  <span className="time-value-large">{formatTime(gameTime)}</span>
+                </div>
+              </div>
+              <div className="completion-buttons">
+                <button className="play-again-button" onClick={playAgain}>
+                  🔄 다시하기
+                </button>
+                <button className="other-games-button" onClick={goToMainPage}>
+                  🎮 다른 놀이보기
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
 
-      <header className="game-header">
-        <button className="back-button" onClick={() => window.history.back()}>
-          ← 뒤로가기
-        </button>
-        <h1>🔢 숫자 놀이</h1>
-        <button className="reset-button" onClick={resetGame}>
-          설정 변경
-        </button>
-      </header>
+        <div className="game-controls">
+          <button className="reset-button" onClick={resetGame}>
+            설정 변경
+          </button>
+        </div>
 
       {!showModal && (
         <div className="game-info">
@@ -371,7 +369,8 @@ const CountingGame: React.FC = () => {
           </div>
         </>
       )}
-    </div>
+      </div>
+    </Layout>
   );
 };
 
