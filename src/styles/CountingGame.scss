@@ -477,9 +477,8 @@ $font-mono: 'Courier New', monospace;
 .current-info {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   height: 100%;
-  gap: 0.5rem;
 
   p {
     font-size: 1.2rem;
@@ -488,20 +487,7 @@ $font-mono: 'Courier New', monospace;
   }
 }
 
-.game-status {
-  min-height: 0.5rem;
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  p {
-    margin: 0.3rem 0;
-  }
-}
-
 .timer-section {
-  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -538,21 +524,7 @@ $font-mono: 'Courier New', monospace;
   margin-left: 0.5rem;
 }
 
-.current-number {
-  @include gradient-text($game-accent);
-  color: var(--button-text);
-  padding: 0.5rem 1rem;
-  font-size: 1.5rem;
-  margin: 0 0.5rem;
-  box-shadow: 0 2px 4px rgba(255, 192, 105, 0.3);
-}
 
-.completed {
-  font-size: 1.5rem !important;
-  color: #27ae60 !important;
-  font-weight: bold;
-  animation: bounce 0.6s ease infinite alternate;
-}
 
 @keyframes bounce {
   from {
@@ -762,10 +734,7 @@ $font-mono: 'Courier New', monospace;
     font-size: 1.5rem;
   }
 
-  .current-number {
-    font-size: 1.2rem;
-    padding: 0.3rem 0.8rem;
-  }
+
 
   .progress-bar {
     height: 10px;
@@ -890,11 +859,6 @@ $font-mono: 'Courier New', monospace;
 
   .current-info p {
     font-size: 1rem;
-  }
-
-  .current-number {
-    font-size: 1.1rem;
-    padding: 0.25rem 0.6rem;
   }
 
   .progress-bar {

@@ -351,15 +351,6 @@ const CountingGame: React.FC = () => {
             </div>
           </div>
           <div className="current-info">
-            <div className="game-status">
-              {!gameStarted ? (
-                <p><span className="current-number">1</span>번 타일을 클릭해서 게임을 시작하세요!</p>
-              ) : gameCompleted ? (
-                <p className="completed">🎉 축하합니다! {maxNumber}까지 모두 찾았어요!</p>
-              ) : (
-                <p>찾는 숫자: <span className="current-number">{currentNumber}</span></p>
-              )}
-            </div>
             <div className="timer-section">
               {!gameStarted ? (
                 <p className="timer-display">⏱️ 준비중...</p>
