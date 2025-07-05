@@ -239,19 +239,10 @@ $font-mono: 'Courier New', monospace;
   justify-content: center;
   color: var(--text-primary);
 
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px $shadow-medium;
+  &:focus {
+    outline: none;
     border-color: var(--focus-outline);
-    background: var(--bg-primary);
-  }
-
-  &.selected {
-    background: $game-primary;
-    border-color: var(--focus-outline);
-    color: var(--button-text);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(255, 192, 105, 0.4);
+    box-shadow: 0 0 0 3px rgba(255, 220, 153, 0.3);
   }
 
   .difficulty-label {
@@ -267,15 +258,17 @@ $font-mono: 'Courier New', monospace;
     margin: 0.25rem 0 0 0;
     line-height: 1.2;
   }
-
-  &.selected .difficulty-range {
-    opacity: 1;
-  }
 }
 
-.modal-buttons {
-  margin: 1.5rem 0;
+// 실제 마우스 호버 시에만 hover 효과 적용
+.difficulty-button.hovered {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px $shadow-medium;
+  border-color: var(--focus-outline);
+  background: var(--bg-primary);
 }
+
+
 
 .start-button {
   @include button-base;
@@ -302,6 +295,41 @@ $font-mono: 'Courier New', monospace;
     &:hover {
       transform: none;
       box-shadow: none;
+    }
+  }
+}
+
+.game-rules {
+  background: var(--bg-secondary);
+  border-radius: $border-radius-md;
+  padding: 1rem;
+  margin: 1rem 0;
+  border: 1px solid var(--border-color);
+
+  h3 {
+    color: var(--text-strong);
+    font-size: 1.1rem;
+    margin: 0 0 0.75rem 0;
+    font-weight: 600;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 1.5rem;
+    color: var(--text-primary);
+
+    li {
+      margin: 0.5rem 0;
+      font-size: 0.95rem;
+      line-height: 1.4;
+
+      &:first-child {
+        margin-top: 0;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
   }
 }
