@@ -74,3 +74,35 @@ export interface AppSettings {
   language: 'ko' | 'en';
   debugMode: boolean;
 }
+
+// 색깔/도형 놀이 관련 타입
+export type ColorType = 'red' | 'blue' | 'green' | 'yellow' | 'purple' | 'orange' | 'pink' | 'cyan';
+export type ShapeType = 'circle' | 'square' | 'triangle' | 'star' | 'heart' | 'diamond';
+
+export interface ColorShapeQuestion {
+  id: string;
+  type: 'color' | 'shape';
+  target: ColorType | ShapeType;
+  options: ColorShapeOption[];
+  correctOptionIndex: number;
+}
+
+export interface ColorShapeOption {
+  id: string;
+  color: ColorType;
+  shape: ShapeType;
+  isCorrect: boolean;
+}
+
+export type ColorShapeDifficulty = 'easy' | 'hard';
+
+export interface ColorShapeGameState {
+  currentQuestion: number;
+  totalQuestions: number;
+  score: number;
+  correctAnswers: number;
+  isCompleted: boolean;
+  startTime: number | null;
+  endTime: number | null;
+  difficulty: ColorShapeDifficulty | null;
+}
